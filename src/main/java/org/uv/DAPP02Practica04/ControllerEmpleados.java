@@ -48,21 +48,21 @@ public class ControllerEmpleados {
     }
     
     @PutMapping("/{id}")
-public ResponseEntity<Empleado> put(@PathVariable Long id, @RequestBody Empleado input) {
-    Optional<Empleado> opt = repositoryEmpleado.findById(id);
-    if (opt.isPresent()) {
-        Empleado empExistente = opt.get();
-        
-        empExistente.setNombre(input.getNombre());
-        empExistente.setDireccion(input.getDireccion());
-        empExistente.setTelefono(input.getTelefono());
-        
-        repositoryEmpleado.save(empExistente);
-        return ResponseEntity.ok(empExistente);
-    } else {
-        return ResponseEntity.notFound().build();
+    public ResponseEntity<Empleado> put(@PathVariable Long id, @RequestBody Empleado input) {
+        Optional<Empleado> opt = repositoryEmpleado.findById(id);
+        if (opt.isPresent()) {
+            Empleado empExistente = opt.get();
+
+            empExistente.setNombre(input.getNombre());
+            empExistente.setDireccion(input.getDireccion());
+            empExistente.setTelefono(input.getTelefono());
+
+            repositoryEmpleado.save(empExistente);
+            return ResponseEntity.ok(empExistente);
+        } else {    
+            return ResponseEntity.notFound().build();
+        }
     }
-}
     
     @PostMapping
     public ResponseEntity<Empleado> post(@RequestBody Empleado input) {
@@ -71,14 +71,14 @@ public ResponseEntity<Empleado> put(@PathVariable Long id, @RequestBody Empleado
     }
     
    @DeleteMapping("/{id}")
-public ResponseEntity<?> delete(@PathVariable Long id) {
-    if (repositoryEmpleado.existsById(id)) {
-        repositoryEmpleado.deleteById(id);
-        return ResponseEntity.noContent().build();
-    } else {
-        return ResponseEntity.notFound().build();
+    public ResponseEntity<?> delete(@PathVariable Long id) {
+        if (repositoryEmpleado.existsById(id)) {
+            repositoryEmpleado.deleteById(id);
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
-}
     
     @ExceptionHandler(Exception.class)
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR, reason = "Error message")
