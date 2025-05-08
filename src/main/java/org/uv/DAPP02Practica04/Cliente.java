@@ -14,25 +14,19 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table(name = "empleados")
-public class Empleado {
+@Table(name="clientes")
+public class Cliente { 
     @Id
-    @Column(name = "clave")
-    @GeneratedValue(generator = "empleados_clave_seq",
+    @Column(name = "id")
+    @GeneratedValue(generator = "clientes_id_seq",
             strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name="empleados_clave_seq",
-            sequenceName = "empleados_clave_seq", initialValue = 1,
+    @SequenceGenerator(name = "clientes_id_seq",
+            sequenceName = "clientes_id_seq", initialValue = 1,
             allocationSize = 1)
     private Long clave;
-    
+
     @Column(name = "nombre", nullable = false)
     private String nombre;
-    
-    @Column(name = "direccion", nullable = false)
-    private String direccion;
-    
-    @Column(name = "telefono", nullable = false)
-    private String telefono;
 
     public Long getClave() {
         return clave;
@@ -48,21 +42,5 @@ public class Empleado {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
     }
 }

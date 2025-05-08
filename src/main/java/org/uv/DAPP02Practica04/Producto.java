@@ -1,5 +1,6 @@
-package Productos;
+package org.uv.DAPP02Practica04;
 
+import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,19 +18,19 @@ import javax.persistence.Table;
 public class Producto {
 
     @Id
-    @Column
-    @GeneratedValue(generator = "productos_clave_seq",
+    @Column(name = "id")
+    @GeneratedValue(generator = "productos_id_seq",
             strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name = "productos_clave_seq",
-            sequenceName = "productos_clave_seq", initialValue = 1,
+    @SequenceGenerator(name = "productos_id_seq",
+            sequenceName = "productos_id_seq", initialValue = 1,
             allocationSize = 1)
     private Long clave;
 
-    @Column
+    @Column(name = "nombre", nullable = false)
     private String nombre;
 
-    @Column
-    private double precio;
+    @Column(name = "precio", nullable = false, columnDefinition = "MONEY")
+    private BigDecimal precio;
 
     public Long getClave() {
         return clave;
@@ -47,11 +48,11 @@ public class Producto {
         this.nombre = nombre;
     }
 
-    public double getPrecio() {
+    public BigDecimal getPrecio() {
         return precio;
     }
 
-    public void setPrecio(double precio) {
+    public void setPrecio(BigDecimal precio) {
         this.precio = precio;
     }
 }
